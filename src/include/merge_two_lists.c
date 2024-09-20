@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
+/* 
 struct ListNode;
 typedef struct ListNode ListNode;
 typedef struct linkedList linkedList;
@@ -12,13 +12,9 @@ typedef struct linkedList {
     ListNode* head;
     ListNode* tail;
 } linkedlist;
+ */
 
-struct ListNode {
-    int val;
-    ListNode *next;
-}; 
-
-
+/* 
 ListNode* initNode(int val);
 linkedlist* initLL(int val);
 linkedlist* insertHead(linkedlist* ll, int val);
@@ -66,10 +62,10 @@ linkedlist* insertTail(linkedlist* ll, int val) {
 linkedlist* removeHead(linkedlist* ll) {
     ListNode* current_head = ll->head;
     if(NULL == current_head) {
-/*         (void) printf("%s %d- head address %p \t ll size %d \n", __func__, __LINE__, current_head, ll->size);
- */        return ll;
+         (void) printf("%s %d- head address %p \t ll size %d \n", __func__, __LINE__, current_head, ll->size);
+        return ll;
     } else {
-/*         (void) printf("%s %d- head address %p \t ll size %d \n", __func__, __LINE__, current_head, ll->size); */
+         (void) printf("%s %d- head address %p \t ll size %d \n", __func__, __LINE__, current_head, ll->size);
         ListNode* new_head = current_head->next;
         ll->head = new_head;
         ll->size--;
@@ -83,12 +79,12 @@ linkedlist* removeTail(linkedlist* ll) {
     ListNode* temp_node = ll->head;
     
     while(ll->tail != temp_node->next) {
-/*         (void) printf("%s %d- %d\n", __func__, __LINE__, temp_node->val); */
+         (void) printf("%s %d- %d\n", __func__, __LINE__, temp_node->val);
         temp_node = temp_node->next;
-    }/* 
+    }
     (void) printf("%s %d- current temp node value: %d\n", __func__, __LINE__, temp_node->val);
     (void) printf("%s %d- current tail node value: %d\n", __func__, __LINE__, ll->tail->val);
-    (void) printf("%s %d- current temp node next value: %d\n", __func__, __LINE__, temp_node->next->val); */
+    (void) printf("%s %d- current temp node next value: %d\n", __func__, __LINE__, temp_node->next->val);
     ll->tail = temp_node;
     (void) free(temp_node->next);
     ll->size--;
@@ -98,7 +94,7 @@ linkedlist* removeTail(linkedlist* ll) {
 void deleteLinkedList(linkedlist* ll) {
     while(0 != ll->size) {
         ll = removeHead(ll);
-/*         (void) printf("remaining ll size: %d\n", ll->size); */
+         (void) printf("remaining ll size: %d\n", ll->size);
     }
     (void) free(ll);
     return;
@@ -112,8 +108,9 @@ void printLinkedList(linkedList* ll) {
     }
     return;
 }
+ */
 
-
+/* 
 struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
 
     uint switch_value = ((NULL == list1) && (NULL == list2)) +
@@ -143,25 +140,23 @@ struct ListNode* mergeTwoLists(struct ListNode* list1, struct ListNode* list2) {
                 head_value = list1->val;
                 list1 = list1->next;
             }
-            linkedList* list3 = initLL(head_value);
+            struct ListNode* list3 = createNode(head_value);
             while((NULL != list1) && (NULL != list2)) {
-                if(list1->val <= list2->val) { 
-                    list3 = insertTail(list3,list1->val);
+                if(list1->val <= list2->val) {
+                    list3 = addTail(list3, list1->val);
                     list1 = list1->next;
                 } else {
-                    list3 = insertTail(list3,list1->val);
+                    list3 = addTail(list3, list1->val);
                     list2 = list2->next;
                 }
             }
             if((NULL == list2) && (NULL != list1)) {
                 while(NULL != list1) {
-                    list3 = insertTail(list3, list1->val);
                     list1 = list1->next;
                 } 
             }
             if(NULL == list1 && (NULL != list2)) {
                 while(NULL != list2) {
-                    list3 = insertTail(list3, list2->val);
                     list2 = list2->next;
                 } 
             }
