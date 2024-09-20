@@ -58,7 +58,7 @@ void printLinkedList(struct ListNode* ll) {
 
 int main(int argument_count, char** argument_vector) {
   int error = 0;
-  (void) printf("%s] %s) %d- argument_count: %d\n", __FILE__, __FUNCTION__, __LINE__, argument_count);
+//  (void) printf("%s] %s) %d- argument_count: %d\n", __FILE__, __FUNCTION__, __LINE__, argument_count);
   struct ListNode* list1 = createNode(-9);
   list1 = addTail(list1,3);
   
@@ -82,19 +82,21 @@ int main(int argument_count, char** argument_vector) {
     if(list1_tmp->val <= list2_tmp->val) {
       current_val = list1_tmp->val;
       list1_tmp = list1_tmp->next; 
-    } else {
+    } else {// (list1_tmp->val > list2_tmp->val) {
       current_val = list2_tmp->val;
       list2_tmp = list2_tmp->next; 
     }
     list3 = addTail(list3,current_val);
   }
-  if(NULL != list1_tmp) {
-    list3 =  addTail(list3, list1_tmp->val);
-    list1_tmp = list1_tmp->next; 
+   if(NULL != list1_tmp) {
+      while(NULL != list1_tmp ) {
+      list3 =  addTail(list3, list1_tmp->val);
+      list1_tmp = list1_tmp->next; } 
   }
   if(NULL != list2_tmp) {
-    list3 =  addTail(list3, list2_tmp->val);
-    list2_tmp = list2_tmp->next;
+      while(NULL != list2_tmp ) {
+      list3 =  addTail(list3, list2_tmp->val);
+      list2_tmp = list2_tmp->next; }
   }
   (void) printLinkedList(list3);
   
